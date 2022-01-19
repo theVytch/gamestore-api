@@ -1,13 +1,22 @@
 package com.m11h.gamestore.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Jogo {
+@Entity(name = "tb_jogo")
+public class Jogo implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String titulo;
     private String nome_empresa;
     private String descricao;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Jogo() {

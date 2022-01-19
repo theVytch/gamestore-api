@@ -1,15 +1,22 @@
 package com.m11h.gamestore.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Categoria {
+@Entity(name = "tb_categoria")
+public class Categoria implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String categoria;
 
+    @OneToMany(mappedBy = "categoria")
     private List<Jogo> jogos = new ArrayList<>();
 
     public Categoria(){}
