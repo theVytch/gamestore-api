@@ -2,6 +2,7 @@ package com.m11h.gamestore.services;
 
 import com.m11h.gamestore.domain.Categoria;
 import com.m11h.gamestore.repositories.CategoriaRepository;
+import com.m11h.gamestore.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class CategoriaService {
 
     public Categoria findById(Long id){
         Optional<Categoria> obj = categoriaRepository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não foi encontrado! id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 }
