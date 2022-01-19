@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/jogos")
 public class JogoResource {
@@ -34,13 +36,13 @@ public class JogoResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Jogo> update(@PathVariable Long id, @RequestBody Jogo obj){
+    public ResponseEntity<Jogo> update(@PathVariable Long id,@Valid @RequestBody Jogo obj){
         Jogo newObj = jogoService.update(id, obj);
         return ResponseEntity.ok().body(newObj);
     }
 
     @PostMapping
-    public ResponseEntity<Jogo> create(@RequestParam(value = "categoria", defaultValue = "0") Long id_cat, @RequestBody Jogo obj){
+    public ResponseEntity<Jogo> create(@Valid @RequestParam(value = "categoria", defaultValue = "0") Long id_cat,@Valid @RequestBody Jogo obj){
         Jogo newObj = jogoService.create(id_cat, obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/jogos/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();

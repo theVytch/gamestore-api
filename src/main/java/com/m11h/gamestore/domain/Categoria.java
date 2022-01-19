@@ -1,6 +1,7 @@
 package com.m11h.gamestore.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Campo NOME é requerido")
     private String nome;
 
     @OneToMany(mappedBy = "categoria")

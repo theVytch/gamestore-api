@@ -3,6 +3,7 @@ package com.m11h.gamestore.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -13,8 +14,11 @@ public class Jogo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Campo TITULO é requerido")
     private String titulo;
+    @NotEmpty(message = "Campo NOME_EMPRESA é requerido")
     private String nome_empresa;
+    @NotEmpty(message = "Campo DESCRICAO é requerido")
     private String descricao;
 
     @JsonIgnore

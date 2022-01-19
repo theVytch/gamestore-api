@@ -2,12 +2,14 @@ package com.m11h.gamestore.dto;
 
 import com.m11h.gamestore.domain.Categoria;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoriaDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    @NotEmpty(message = "Campo NOME é requerido")
     private String nome;
 
     public CategoriaDto(){}
